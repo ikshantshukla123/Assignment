@@ -1,6 +1,6 @@
 import express from 'express';
 import authRoutes from "./routes/auth.routes.js";
-
+import adminRoutes from "./routes/admin.routes.js";
 
 const app = express();
 
@@ -16,6 +16,7 @@ app.get("/health", (req, res) => {
 });
 
 app.use("/auth", authRoutes);
+app.use("/admins", adminRoutes);
 
 
 export default app;
