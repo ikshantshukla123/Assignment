@@ -1,5 +1,6 @@
 export const saveToken = (token) => {
   localStorage.setItem("token", token);
+document.cookie = `token=${token}; path=/`;
 };
 
 export const getToken = () => {
@@ -9,4 +10,5 @@ export const getToken = () => {
 
 export const logout = () => {
   localStorage.removeItem("token");
+  document.cookie = "token=; path=/; max-age=0";
 };
