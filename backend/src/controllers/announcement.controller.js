@@ -21,7 +21,6 @@ export const getAnnouncements = async (req, res) => {
 
 
 
-
 export const createAnnouncement = async (req, res) => {
   const { content, toUserId } = req.body;
 
@@ -34,6 +33,16 @@ export const createAnnouncement = async (req, res) => {
     fromAdmin: req.user.userId,
     toUser: toUserId || null,
   });
+
+  // emit via socket
+  const io = req.app.get("io");
+
+  if (toUserId) {
+    io.to(toUserId).emit("new_announcement", announcement);
+    
+  } else {
+    io.emit("broadcast_announcement", announcement);
+  }
 
   res.status(201).json(announcement);
 };
