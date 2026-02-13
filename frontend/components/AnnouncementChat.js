@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { apiRequest } from "@/lib/api";
+import {useSocket} from "@/hooks/useSocket"
 
 
 export default function AnnouncementChat() {
@@ -9,7 +10,7 @@ export default function AnnouncementChat() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  
+
   useEffect(() => {
     const fetchAnnouncements = async () => {
       try {
@@ -24,6 +25,15 @@ export default function AnnouncementChat() {
 
     fetchAnnouncements();
   }, []);
+
+  const handleNewAnnouncement = useCallback((announcement) => {
+  setAnnouncements((prev) => {
+    const exists = prev.some((a) => a._id === announcement._id);
+    if (exists) return prev;
+    return [announcement, ...prev];
+  });
+}, []);
+    useSocket(handleNewAnnouncement);
 
   if (loading) return <p>Loading announcements...</p>;
   if (error) return <p className="text-red-500">{error}</p>;
