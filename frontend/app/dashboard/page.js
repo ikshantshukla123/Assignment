@@ -1,5 +1,11 @@
+import AnnouncementChat from "@/components/AnnouncementChat"
+
+
 export default function dashBoard(){
   return(
-    <h2>Dashbord</h2>
+    <div>
+      <h1 className="text-2xl font-semibold">Announcements</h1>
+      <AnnouncementChat />
+    </div>
   )
 }
