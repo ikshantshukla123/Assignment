@@ -41,7 +41,7 @@ export const createAnnouncement = async (req, res) => {
     io.to(toUserId).emit("new_announcement", announcement);
     
   } else {
-    io.emit("broadcast_announcement", announcement);
+    io.emit("new_announcement", announcement);
   }
 
   res.status(201).json(announcement);
