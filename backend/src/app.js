@@ -2,6 +2,7 @@ import express from 'express';
 import authRoutes from "./routes/auth.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
 import userRoutes from "./routes/user.routes.js";
+import cors from "cors";
 import announcementRoutes from "./routes/announcement.routes.js";
 
 const app = express();
@@ -9,7 +10,7 @@ const app = express();
 
 app.use(express.json());
 
-
+app.use(cors());
 
 
 

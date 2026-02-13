@@ -12,15 +12,8 @@ import { socketAuthMiddleware } from "./middleware/socketAuth.middleware.js";
 
 
 
-
-
-
-
-
 const startServer = async () => {
  
-
-
 await connectDB();
   await seedInitialAdmin();
   const server = http.createServer(app);
@@ -36,7 +29,7 @@ await connectDB();
 
 
 app.set("io", io);
-   io.use(socketAuthMiddleware);
+   io.use(socketAuthMiddleware); //we are using socket middleware
 
     io.on("connection", (socket) => {
    socket.join(socket.user.userId);
