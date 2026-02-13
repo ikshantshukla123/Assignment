@@ -13,7 +13,7 @@ export const login = async (req,res)=>{
 
 
         if(!username || !password){
-            return  res.json(400).json({error:"Username and password are required"});
+            return  res.status(400).json({error:"Username and password are required"});
         }
 
         const user = await User.findOne({username});
@@ -48,3 +48,5 @@ export const login = async (req,res)=>{
     res.status(500).json({ message: "Server error" });
   }
 };
+
+
