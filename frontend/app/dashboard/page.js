@@ -10,7 +10,7 @@ export default function DashboardPage() {
 
   return (
     <div>
-      <h1 className="text-10xl font-semibold">Announcements</h1>
+      <h1 className=" ml-6 text-4xl font-semibold">Announcements</h1>
 
       {role === "admin" && <AnnouncementInput />}
 
