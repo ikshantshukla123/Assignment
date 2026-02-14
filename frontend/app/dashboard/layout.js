@@ -35,7 +35,7 @@ export default function DashboardLayout({ children }) {
       {role === "admin" && sidebarOpen && (
         <Sidebar onClose={() => setSidebarOpen(false)} />
       )}
-      <main className={`flex-1 p-6 bg-gray-50 transition-all ${role === "admin" && sidebarOpen ? "ml-56" : "ml-10"}`}>
+      <main className={`flex-1 p-6 bg-gray-50 transition-all ${role === "admin" && sidebarOpen ? "ml-56" : ""}`}>
         <div className="mb-6 flex justify-end">
           <Button
             onClick={handleLogout}
