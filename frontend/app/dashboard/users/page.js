@@ -14,6 +14,7 @@ export default function UsersPage() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [showError, setShowError] = useState(false);
+   const [loading, setLoading] = useState(true);
 
   const fetchUsers = async () => {
     try {
@@ -22,6 +23,8 @@ export default function UsersPage() {
     } catch (error) {
       setErrorMessage(error.message);
       setShowError(true);
+    } finally{
+      setLoading(false);
     }
   };
 
@@ -56,6 +59,9 @@ export default function UsersPage() {
       setShowError(true);
     }
   };
+ if (loading) {
+    return <p className="text-gray-500">Loading users...</p>;
+  }
 
 
 
