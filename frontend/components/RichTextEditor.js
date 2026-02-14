@@ -13,7 +13,7 @@ export default function RichTextEditor({ value = "", onChange, placeholder }) {
     underline: false,
   });
 
-  // Sync editor content with value prop
+  // clear editor when empty
   useEffect(() => {
     if (editorRef.current && value === "" && editorRef.current.innerHTML !== "") {
       editorRef.current.innerHTML = "";
@@ -160,3 +160,5 @@ export default function RichTextEditor({ value = "", onChange, placeholder }) {
 
 
 // This component provides a rich text editor with basic formatting options bold, italic, underline, lists.
+
+// i taked that code from google and made some changes to it, so that it can be used in our project. It uses contenteditable div and execCommand for formatting, and DOMPurify for sanitization.

@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Sidebar from "@/components/Sidebar";
-import { getUserFromToken } from "@/lib/auth";
-import { MenuIcon } from "lucide-react";
+import { getUserFromToken, logout } from "@/lib/auth";
+import { MenuIcon, LogOut } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function DashboardLayout({ children }) {
   const router = useRouter();
@@ -21,6 +22,12 @@ export default function DashboardLayout({ children }) {
     setRole(user.role);
   }, [router]);
 
+  const handleLogout = () => {
+    logout();
+    router.push("/login");
+  };
+
+
   if (!role) return null;
 
   return (
@@ -29,6 +36,19 @@ export default function DashboardLayout({ children }) {
         <Sidebar onClose={() => setSidebarOpen(false)} />
       )}
       <main className={`flex-1 p-6 bg-gray-50 transition-all ${role === "admin" && sidebarOpen ? "ml-56" : "ml-10"}`}>
+
+        <div className="mb-6 flex justify-end">
+          <Button
+            onClick={handleLogout}
+            variant="outline"
+            size="sm"
+            className="flex items-center gap-2"
+          >
+            <LogOut className="h-4 w-4" />
+            Logout
+          </Button>
+        </div>
+
         {role === "admin" && !sidebarOpen && (
           <button
             onClick={() => setSidebarOpen(true)}
