@@ -6,7 +6,10 @@ export default function UserTable({
   title,
   data,
   onDelete,
+  onUpdate,
   showDelete = true,
+  showUpdate = true,
+  currentUserId,
 }) {
   return (
     <div className="rounded border bg-white p-4 shadow-sm">
@@ -17,7 +20,7 @@ export default function UserTable({
           <tr className="border-b">
             <th className="py-2 text-left">Username</th>
             <th className="py-2 text-left">Role</th>
-            {showDelete && <th className="py-2">Actions</th>}
+            {(showDelete || showUpdate) && <th className="py-2">Actions</th>}
           </tr>
         </thead>
 
@@ -30,23 +33,41 @@ export default function UserTable({
             </tr>
           )}
 
-          {data.map((u) => (
-            <tr key={u._id} className="border-b last:border-b-0">
-              <td className="py-2">{u.username}</td>
-              <td className="py-2 capitalize">{u.role}</td>
-              {showDelete && (
-                <td className="py-2 text-center">
-                  <Button
-                    variant="destructive"
-                    size="sm"
-                    onClick={() => onDelete(u._id)}
-                  >
-                    Delete
-                  </Button>
-                </td>
-              )}
-            </tr>
-          ))}
+          {data.map((u) => {
+            const isSelf = currentUserId && u._id === currentUserId;
+            return (
+              <tr key={u._id} className="border-b last:border-b-0">
+                <td className="py-2">{u.username}</td>
+                <td className="py-2 capitalize">{u.role}</td>
+                {(showDelete || showUpdate) && (
+                  <td className="py-2 text-center">
+                    <div className="flex gap-2 justify-center">
+                      {showUpdate && onUpdate && (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => onUpdate(u)}
+                          disabled={isSelf}
+                        >
+                          Update
+                        </Button>
+                      )}
+                      {showDelete && (
+                        <Button
+                          variant="destructive"
+                          size="sm"
+                          onClick={() => onDelete(u._id)}
+                          disabled={isSelf}
+                        >
+                          Delete
+                        </Button>
+                      )}
+                    </div>
+                  </td>
+                )}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
