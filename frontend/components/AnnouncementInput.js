@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { apiRequest } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { getUserFromToken } from "@/lib/auth";
 
 export default function AnnouncementInput() {
   const [content, setContent] = useState("");
@@ -12,19 +13,34 @@ export default function AnnouncementInput() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // fetch users for targeted announcements
+  // fetch both users and admins for targeted announcements
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchAllUsers = async () => {
       try {
-        const data = await apiRequest("/users");
-        setUsers(data);
+        const [usersData, adminsData] = await Promise.all([
+          apiRequest("/users"),
+          apiRequest("/admins"),
+        ]);
+
+        // Get current admin ID from token
+        const user = getUserFromToken();
+        const currentAdminId = user?.userId || null;
+
+        // Combine users and admins, exclude current admin
+        const allUsers = [...usersData, ...adminsData].filter(
+          (u) => u._id !== currentAdminId
+        );
+
+        setUsers(allUsers);
       } catch (err) {
         console.error("Failed to load users");
       }
     };
 
-    fetchUsers();
+    fetchAllUsers();
   }, []);
+
+
 
   const handleSend = async () => {
     if (!content.trim()) return;
@@ -69,7 +85,7 @@ export default function AnnouncementInput() {
           <option value="">Broadcast to all</option>
           {users.map((u) => (
             <option key={u._id} value={u._id}>
-              {u.username}
+              {u.username} ({u.role})
             </option>
           ))}
         </select>

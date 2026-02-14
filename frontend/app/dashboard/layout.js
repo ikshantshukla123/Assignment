@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Sidebar from "@/components/Sidebar";
-import { getToken } from "@/lib/auth";
+import { getUserFromToken } from "@/lib/auth";
 import { MenuIcon } from "lucide-react";
 
 export default function DashboardLayout({ children }) {
@@ -12,21 +12,19 @@ export default function DashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   useEffect(() => {
-    const token = getToken();
-    if (!token) {
+    const user = getUserFromToken();
+    if (!user) {
       router.push("/login");
       return;
     }
 
-
-    const payload = JSON.parse(atob(token.split(".")[1]));
-    setRole(payload.role);
+    setRole(user.role);
   }, [router]);
 
   if (!role) return null;
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen mr-10 ">
       {role === "admin" && sidebarOpen && (
         <Sidebar onClose={() => setSidebarOpen(false)} />
       )}
