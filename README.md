@@ -53,9 +53,11 @@ backend/
 │   ├── app.js
 │   └── server.js
 └── package.json
+```
 
+### Frontend
 
-Frontend
+```
 frontend/
 ├── app/
 │   ├── login
@@ -70,7 +72,6 @@ frontend/
 ├── lib
 ├── middleware.js
 └── package.json
-
 ```
 
 ---
@@ -84,23 +85,47 @@ PORT=4000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 JWT_EXPIRES_IN=1d
-ADMIN_USERNAME=//write it by yourself
-ADMIN_PASSWORD=_______
-
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=Admin@123
+```
 
 ### Frontend (`frontend/.env.local`)
 
+```
 NEXT_PUBLIC_API_BASE_URL=http://localhost:4000
 ```
-Getting Started
-```
-1. Clone the repository
-git clone <https://github.com/ikshantshukla123/Assignment.git>
-cd organization-announcements-platform
 
-2. Backend setup
+---
+
+## Getting Started
+
+### 1. Clone the repository
+
+```bash
+# Using HTTPS
+git clone https://github.com/ikshantshukla123/Assignment.git
+
+# Using SSH
+git clone git@github.com:ikshantshukla123/Assignment.git
+
+# Navigate to project directory
+cd Assignment
+```
+
+### 2. Backend setup
+
+```bash
+# Navigate to backend directory
 cd backend
+
+# Install dependencies
 npm install
+
+# Create environment file
+cp .env.example .env
+# Edit .env with your database credentials
+
+# Start development server
 npm run dev
 ```
 
@@ -110,14 +135,28 @@ An initial admin user is automatically created on first run.
 
 ### 3. Frontend setup
 
+```bash
+# Open a new terminal and navigate to frontend directory
+cd frontend
 
+# Install dependencies
+npm install
 
+# Create environment file
+cp .env.local.example .env.local
+
+# Start development server
+npm run dev
+```
 
 The frontend application will start on `http://localhost:3000`.
 
 ---
 
 ## Default Admin Credentials
+
+- **Username:** admin
+- **Password:** Admin@123
 
 ---
 
@@ -152,4 +191,3 @@ The frontend application will start on `http://localhost:3000`.
 ## Author
 
 Ikshant Shukla
-
