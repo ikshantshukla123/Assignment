@@ -62,6 +62,7 @@ backend/
 │   └── server.js
 └── package.json
 
+
 Frontend
 frontend/
 ├── app/
@@ -76,6 +77,7 @@ frontend/
 ├── lib
 ├── middleware.js
 └── package.json
+
 
 
 Environment Variables
