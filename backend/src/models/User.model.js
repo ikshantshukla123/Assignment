@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true, // hashed password
+      select: false, // exclude from queries by default
     },
     role: {
       type: String,
