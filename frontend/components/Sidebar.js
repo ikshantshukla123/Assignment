@@ -33,6 +33,9 @@ export default function Sidebar({ onClose }) {
         <Link href="/dashboard/users" className={linkClass("/dashboard/users")}>
           Users
         </Link>
+        <Link href="/dashboard/activity-logs" className={linkClass("/dashboard/activity-logs")}>
+          Activity Logs
+        </Link>
       </nav>
     </aside>
   );

@@ -4,6 +4,7 @@ import adminRoutes from "./routes/admin.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import cors from "cors";
 import announcementRoutes from "./routes/announcement.routes.js";
+import activityLogRoutes from "./routes/activityLog.routes.js";
 import { env } from "./config/env.js";
 
 const app = express();
@@ -46,6 +47,7 @@ app.use("/auth", authRoutes);
 app.use("/admins", adminRoutes);
 app.use("/users", userRoutes);
 app.use("/announcements", announcementRoutes);
+app.use("/activity-logs", activityLogRoutes);
 
 
 

@@ -36,10 +36,16 @@ export const createUser = async (req, res) => {
     role: "user",
   });
 
+  const performer = await User.findById(req.user.userId);
+
   await ActivityLog.create({
     action: "CREATE_USER",
     performedBy: req.user.userId,
+    performedByUsername: performer.username,
+    performedByRole: performer.role,
     targetUser: user._id,
+    targetUsername: user.username,
+    targetRole: user.role,
   });
 
   res.status(201).json({ message: "User created" });
@@ -61,10 +67,16 @@ export const updateUser = async (req, res) => {
 
   await user.save();
 
+  const performer = await User.findById(req.user.userId);
+
   await ActivityLog.create({
     action: "UPDATE_USER",
     performedBy: req.user.userId,
+    performedByUsername: performer.username,
+    performedByRole: performer.role,
     targetUser: user._id,
+    targetUsername: user.username,
+    targetRole: user.role,
   });
 
   res.json({ message: "User updated" });
@@ -79,12 +91,20 @@ export const deleteUser = async (req, res) => {
     return res.status(404).json({ message: "User not found" });
   }
 
+  const performer = await User.findById(req.user.userId);
+  const targetUsername = user.username;
+  const targetRole = user.role;
+
   await user.deleteOne();
 
   await ActivityLog.create({
     action: "DELETE_USER",
     performedBy: req.user.userId,
+    performedByUsername: performer.username,
+    performedByRole: performer.role,
     targetUser: id,
+    targetUsername: targetUsername,
+    targetRole: targetRole,
   });
 
   res.json({ message: "User deleted" });
