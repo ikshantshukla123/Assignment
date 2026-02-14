@@ -9,7 +9,11 @@ export const getAnnouncements = async (req, res) => {
   const userId = req.user.userId;
 
   const announcements = await Announcement.find({
-    $or: [{ toUser: null }, { toUser: userId }],
+    $or: [
+      { toUser: null }, // broadcast announcements
+      { toUser: userId }, // announcements targeted to this user
+      { fromAdmin: userId }, // announcements created by this admin
+    ],
   })
     .populate("fromAdmin", "username")
     .sort({ createdAt: -1 }); //. this -1 will show new announcements first
@@ -34,13 +38,19 @@ export const createAnnouncement = async (req, res) => {
     toUser: toUserId || null,
   });
 
+  // Populate the announcement before emitting
+  await announcement.populate("fromAdmin", "username");
+
   // emit via socket
   const io = req.app.get("io");
 
   if (toUserId) {
+    // Send to the targeted user
     io.to(toUserId).emit("new_announcement", announcement);
-    
+    // Also send to the admin who created it
+    io.to(req.user.userId).emit("new_announcement", announcement);
   } else {
+    // Broadcast to everyone
     io.emit("new_announcement", announcement);
   }
 
