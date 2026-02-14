@@ -1,55 +1,46 @@
 # **Organization Announcements Platform**
 
-A full-stack web application where administrators can manage users and send real-time announcements to all users or specific individuals. The system supports secure authentication, role-based access, and real-time updates.
+A full-stack web application where administrators can manage users and send real-time announcements to all users or specific individuals. The system supports secure authentication, role-based access control, and real-time updates.
 
-Features
+---
 
-JWT-based authentication
+## Features
 
-Role-based access control (Admin, User)
+- JWT-based authentication  
+- Role-based access control (Admin, User)  
+- Admin management (create and delete admins)  
+- User management (create and delete users)  
+- Real-time announcements using Socket.IO  
+- Targeted announcements to specific users  
+- Announcement persistence with database storage  
+- Secure password hashing with bcrypt  
+- Frontend route protection using Next.js middleware  
 
-Admin management (create and delete admins)
+---
 
-User management (create and delete users)
+## Tech Stack
 
-Real-time announcements using Socket.IO
+### Backend
+- Node.js  
+- Express  
+- MongoDB with Mongoose  
+- JWT (jsonwebtoken)  
+- bcrypt  
+- Socket.IO  
 
-Targeted announcements to specific users
+### Frontend
+- Next.js (App Router)  
+- Tailwind CSS  
+- shadcn/ui  
+- Socket.IO client  
 
-Announcement persistence with database storage
+---
 
-Secure password hashing with bcrypt
+## Project Structure
 
-Frontend route protection using Next.js middleware
+### Backend
 
-Tech Stack
-Backend
-
-Node.js
-
-Express
-
-MongoDB with Mongoose
-
-JWT (jsonwebtoken)
-
-bcrypt
-
-Socket.IO
-
-Frontend
-
-Next.js (App Router)
-
-Tailwind CSS
-
-shadcn/ui
-
-Socket.IO client
-
-Project Structure
 ```
-Backend
 backend/
 ├── src/
 │   ├── controllers
@@ -82,9 +73,13 @@ frontend/
 
 ```
 
-Environment Variables
+---
+
+## Environment Variables
+
+### Backend (`backend/.env`)
+
 ```
-Backend (backend/.env)
 PORT=4000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
@@ -92,7 +87,9 @@ JWT_EXPIRES_IN=1d
 ADMIN_USERNAME=//write it by yourself
 ADMIN_PASSWORD=_______
 
-Frontend (frontend/.env.local)
+
+### Frontend (`frontend/.env.local`)
+
 NEXT_PUBLIC_API_BASE_URL=http://localhost:4000
 ```
 Getting Started
@@ -107,54 +104,52 @@ npm install
 npm run dev
 ```
 
-The backend server will start on http://localhost:4000.
+The backend server will start on `http://localhost:4000`.
 
 An initial admin user is automatically created on first run.
 
-3. Frontend setup
-cd frontend
-npm install
-npm run dev
+### 3. Frontend setup
 
 
-The frontend application will start on http://localhost:3000.
 
-Default Admin Credentials
-Username: admin
-Password: Admin@123
 
-Application Flow
+The frontend application will start on `http://localhost:3000`.
 
-User logs in and receives a JWT.
+---
 
-JWT is stored in localStorage and cookies.
+## Default Admin Credentials
 
-Dashboard loads announcements using REST APIs.
+---
 
-Socket.IO establishes an authenticated connection.
+## Application Flow
 
-New announcements are delivered in real time.
+1. User logs in and receives a JWT.  
+2. JWT is stored in localStorage and cookies.  
+3. Dashboard loads announcements using REST APIs.  
+4. Socket.IO establishes an authenticated connection.  
+5. New announcements are delivered in real time.  
+6. On page refresh, announcements are restored from the database.  
 
-On page refresh, announcements are restored from the database.
+---
 
-Security Notes
+## Security Notes
 
-Passwords are stored using bcrypt hashing.
+- Passwords are stored using bcrypt hashing.  
+- Password fields are excluded from queries by default (`select: false`).  
+- Frontend middleware is used only for route redirection.  
+- All authentication and authorization checks are enforced on the backend.  
 
-Password fields are excluded from queries by default (select: false).
+---
 
-Frontend middleware is used only for route redirection.
+## Deployment
 
-All authentication and authorization checks are enforced on the backend.
+- Backend can be deployed on platforms like Render or Railway.  
+- Frontend can be deployed on Vercel.  
+- Environment variables must be configured on the hosting platform.  
 
-Deployment
+---
 
-Backend can be deployed on platforms like Render or Railway.
-
-Frontend can be deployed on Vercel.
-
-Environment variables must be configured on the hosting platform.
-
-Author
+## Author
 
 Ikshant Shukla
+
