@@ -1,10 +1,6 @@
-<<<<<<< Updated upstream
 import Link from "next/link";
 import { Bell, Users, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
-=======
-
->>>>>>> Stashed changes
 
 export default function Home() {
   return (
