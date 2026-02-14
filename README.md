@@ -48,6 +48,7 @@ shadcn/ui
 Socket.IO client
 
 Project Structure
+```
 Backend
 backend/
 ├── src/
@@ -78,9 +79,10 @@ frontend/
 ├── middleware.js
 └── package.json
 
-
+```
 
 Environment Variables
+```
 Backend (backend/.env)
 PORT=4000
 MONGO_URI=your_mongodb_connection_string
@@ -91,8 +93,9 @@ ADMIN_PASSWORD=_______
 
 Frontend (frontend/.env.local)
 NEXT_PUBLIC_API_BASE_URL=http://localhost:4000
-
+```
 Getting Started
+```
 1. Clone the repository
 git clone <https://github.com/ikshantshukla123/Assignment.git>
 cd organization-announcements-platform
@@ -101,7 +104,7 @@ cd organization-announcements-platform
 cd backend
 npm install
 npm run dev
-
+```
 
 The backend server will start on http://localhost:4000.
 
