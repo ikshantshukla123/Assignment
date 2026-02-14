@@ -199,6 +199,17 @@ The frontend application will start on `http://localhost:3000`.
 
 ---
 
+
+### Cold Start Notice
+
+This application is deployed using a free-tier hosting service (Render).
+Due to this, the backend may go to sleep after periods of inactivity.
+
+The first request after inactivity may take 20–60 seconds while the server wakes up.
+Subsequent requests will work normally.
+
+In a production environment, this would be resolved by using an always-on instance.
+
 ## Author
 
 Ikshant Shukla
