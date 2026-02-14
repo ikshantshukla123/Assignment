@@ -35,9 +35,7 @@ export default function DashboardLayout({ children }) {
       {role === "admin" && sidebarOpen && (
         <Sidebar onClose={() => setSidebarOpen(false)} />
       )}
-<<<<<<< Updated upstream
       <main className={`flex-1 p-6 bg-gray-50 transition-all ${role === "admin" && sidebarOpen ? "ml-56" : "ml-10"}`}>
-
         <div className="mb-6 flex justify-end">
           <Button
             onClick={handleLogout}
@@ -49,10 +47,6 @@ export default function DashboardLayout({ children }) {
             Logout
           </Button>
         </div>
-
-=======
-      <main className={`flex-1 p-6 bg-gray-50 transition-all ${role === "admin" && sidebarOpen ? "ml-56" : ""}`}>
->>>>>>> Stashed changes
         {role === "admin" && !sidebarOpen && (
           <button
             onClick={() => setSidebarOpen(true)}
