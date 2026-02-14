@@ -1,7 +1,10 @@
 import { io } from "socket.io-client";
 import { getToken } from "./auth";
 
+
 let socket = null;
+
+
 
 export const connectSocket = () => {
   if (socket) return socket;
@@ -17,6 +20,8 @@ export const connectSocket = () => {
 
   return socket;
 };
+
+
 
 export const disconnectSocket = () => {
   if (socket) {

@@ -72,6 +72,7 @@ frontend/
 │   │   ├── admins
 │   │   └── users
 │   ├── layout.js
+|   ├──  page.js
 │   └── globals.css
 ├── components
 ├── hooks
