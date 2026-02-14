@@ -1,4 +1,4 @@
-Organization Announcements Platform
+# **Organization Announcements Platform**
 
 A full-stack web application where administrators can manage users and send real-time announcements to all users or specific individuals. The system supports secure authentication, role-based access, and real-time updates.
 
