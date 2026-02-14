@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { apiRequest } from "@/lib/api";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import RichTextEditor from "@/components/RichTextEditor";
 import { getUserFromToken } from "@/lib/auth";
 
 export default function AnnouncementInput() {
@@ -43,7 +43,9 @@ export default function AnnouncementInput() {
 
 
   const handleSend = async () => {
-    if (!content.trim()) return;
+    // Check if content is empty (strip HTML tags)
+    const textContent = content.replace(/<[^>]*>/g, "").trim();
+    if (!textContent) return;
 
     setLoading(true);
     setError("");
@@ -70,10 +72,10 @@ export default function AnnouncementInput() {
     <div className="mt-4 rounded border bg-white p-4 shadow-sm">
       <h3 className="mb-2 font-medium">Send Announcement</h3>
 
-      <Input
-        placeholder="Write an announcement..."
+      <RichTextEditor
         value={content}
-        onChange={(e) => setContent(e.target.value)}
+        onChange={setContent}
+        placeholder="Write an announcement with formatting..."
       />
 
       <div className="mt-2 flex gap-2">
