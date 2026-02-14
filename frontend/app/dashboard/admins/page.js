@@ -63,7 +63,7 @@ export default function AdminsPage() {
       setShowError(true);
     }
   };
-
+//since admins were taking time to get fetched and when the ui was not clear that why added this
   if (loading) {
     return <p className="text-gray-500">Loading admins...</p>;
   }

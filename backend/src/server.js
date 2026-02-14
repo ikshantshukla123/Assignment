@@ -13,28 +13,30 @@ import { socketAuthMiddleware } from "./middleware/socketAuth.middleware.js";
 
 
 const startServer = async () => {
- 
-await connectDB();
+
+  await connectDB();
   await seedInitialAdmin();
   const server = http.createServer(app);
 
+  // Socket.IO with secure CORS previously we were allowing all origins but now we will allow only our frontend origin to connect to socket
+  const allowedOrigins = env.CORS_ORIGIN.split(',').map(origin => origin.trim());
 
-
-   const io = new Server(server, {
+  const io = new Server(server, {
     cors: {
-      origin: "*", // we will use frontend URL
+      origin: allowedOrigins,
       methods: ["GET", "POST"],
+      credentials: true
     },
   });
 
 
-app.set("io", io);
-   io.use(socketAuthMiddleware); //we are using socket middleware
+  app.set("io", io);
+  io.use(socketAuthMiddleware); //we are using socket middleware
 
-    io.on("connection", (socket) => {
-   socket.join(socket.user.userId);
+  io.on("connection", (socket) => {
+    socket.join(socket.user.userId);
 
-  console.log("User connected:", socket.user.userId);
+    console.log("User connected:", socket.user.userId);
 
     socket.on("disconnect", () => {
       console.log("User disconnected:", socket.user.userId);

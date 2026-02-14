@@ -1,20 +1,24 @@
 # **Organization Announcements Platform**
 
-A full-stack web application where administrators can manage users and send real-time announcements to all users or specific individuals. The system supports secure authentication, role-based access control, and real-time updates.
+A full-stack web application for managing organizational announcements with real-time updates, role-based access control, and rich text formatting support.
+
+## 🚀 Live Demo
+
+- **Frontend**: [https://assignment-green-nine.vercel.app/](https://assignment-green-nine.vercel.app/)
+- **Backend API**: [https://organization-announcements-backend.onrender.com/](https://organization-announcements-backend.onrender.com/)
 
 ---
 
 ## Features
 
-- JWT-based authentication  
-- Role-based access control (Admin, User)  
-- Admin management (create and delete admins)  
-- User management (create and delete users)  
-- Real-time announcements using Socket.IO  
-- Targeted announcements to specific users  
-- Announcement persistence with database storage  
-- Secure password hashing with bcrypt  
-- Frontend route protection using Next.js middleware  
+- **Real-time Announcements**: Instant updates using Socket.IO
+- **Rich Text Editor**: Format announcements with bold, italic, underline, and lists
+- **Targeted Messaging**: Send announcements to specific users or broadcast to all
+- **Role-Based Access**: Separate views and permissions for admins and users
+- **User Management**: Admins can create, update, and delete users and other admins
+- **Secure Authentication**: JWT-based authentication with bcrypt password hashing
+- **Frontend Route Protection**: Next.js middleware for secure routing
+- **Responsive Design**: Modern UI built with Tailwind CSS and shadcn/ui
 
 ---
 
@@ -80,35 +84,42 @@ frontend/
 
 ### Backend (`backend/.env`)
 
-```
+```env
 PORT=4000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
-JWT_EXPIRES_IN=1d
 ADMIN_USERNAME=admin
 ADMIN_PASSWORD=Admin@123
+NODE_ENV=development
+
+# CORS Configuration
+# For local development:
+CORS_ORIGIN=http://localhost:3000
+
+# For production (comma-separated for multiple origins):
+# CORS_ORIGIN=https://assignment-green-nine.vercel.app,http://localhost:3000
 ```
 
 ### Frontend (`frontend/.env.local`)
 
-```
+```env
+# For local development:
 NEXT_PUBLIC_API_BASE_URL=http://localhost:4000
 ```
 
 ---
 
-## Getting Started
+## 📦 Getting Started
+
+### Prerequisites
+- Node.js (v18+)
+- MongoDB (local or Atlas)
+- Git
 
 ### 1. Clone the repository
 
 ```bash
-# Using HTTPS
 git clone https://github.com/ikshantshukla123/Assignment.git
-
-# Using SSH
-git clone git@github.com:ikshantshukla123/Assignment.git
-
-# Navigate to project directory
 cd Assignment
 ```
 
@@ -123,15 +134,15 @@ npm install
 
 # Create environment file
 cp .env.example .env
-# Edit .env with your database credentials
+# Edit .env with your MongoDB URI, JWT secret, and CORS origin
 
 # Start development server
-npm run dev
+npm start
 ```
 
 The backend server will start on `http://localhost:4000`.
 
-An initial admin user is automatically created on first run.
+**Note**: An initial admin user is automatically created on first run using credentials from .env
 
 ### 3. Frontend setup
 
@@ -143,7 +154,7 @@ cd frontend
 npm install
 
 # Create environment file
-cp .env.local.example .env.local
+cp .env.example .env.local
 
 # Start development server
 npm run dev
