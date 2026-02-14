@@ -16,8 +16,13 @@ export default function UsersPage() {
   const [showError, setShowError] = useState(false);
 
   const fetchUsers = async () => {
-    const data = await apiRequest("/users");
-    setUsers(data);
+    try {
+      const data = await apiRequest("/users");
+      setUsers(data);
+    } catch (error) {
+      setErrorMessage(error.message);
+      setShowError(true);
+    }
   };
 
   useEffect(() => {
@@ -51,6 +56,8 @@ export default function UsersPage() {
       setShowError(true);
     }
   };
+
+
 
   return (
     <div className="space-y-6">

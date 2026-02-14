@@ -14,10 +14,18 @@ export default function AdminsPage() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [showError, setShowError] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const fetchAdmins = async () => {
-    const data = await apiRequest("/admins");
-    setAdmins(data);
+    try {
+      const data = await apiRequest("/admins");
+      setAdmins(data);
+    } catch (error) {
+      setErrorMessage(error.message);
+      setShowError(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -25,7 +33,11 @@ export default function AdminsPage() {
   }, []);
 
   const handleCreate = async () => {
-    if (!username || !password) return;
+    if (!username?.trim() || password.length < 6) {
+      setErrorMessage("Username required and password must be 6+ chars");
+      setShowError(true);
+      return;
+    }
 
     try {
       await apiRequest("/admins", {
@@ -51,6 +63,10 @@ export default function AdminsPage() {
       setShowError(true);
     }
   };
+
+  if (loading) {
+    return <p className="text-gray-500">Loading admins...</p>;
+  }
 
   return (
     <div className="space-y-6">
