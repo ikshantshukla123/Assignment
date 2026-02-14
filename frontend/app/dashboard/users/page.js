@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { apiRequest } from "@/lib/api";
 import UserTable from "@/components/UserTable";
 import { Button } from "@/components/ui/button";
@@ -54,6 +55,11 @@ export default function UsersPage() {
   return (
     <div className="space-y-6">
       <div className="rounded border bg-white p-4 shadow-sm">
+        <Link href="/dashboard">
+          <Button variant="outline" size="sm" className="mb-4">
+            ← Back to Dashboard
+          </Button>
+        </Link>
         <h2 className="mb-2 font-medium">Add User</h2>
         <div className="flex gap-2">
           <Input
