@@ -2,10 +2,10 @@
 
 A full-stack web application for managing organizational announcements with real-time updates, role-based access control, and rich text formatting support.
 
-## 🚀 Live Demo
+## Live Demo
 
 - **Frontend**: [https://assignment-green-nine.vercel.app/](https://assignment-green-nine.vercel.app/)
-- **Backend API**: [https://organization-announcements-backend.onrender.com/](https://organization-announcements-backend.onrender.com/)
+- **Backend API**: [https://organization-announcements-backend.onrender.com/](https://organization-announcements-backend.onrender.com/health/)
 
 ---
 
