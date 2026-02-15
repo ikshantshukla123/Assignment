@@ -91,8 +91,8 @@ frontend/
 PORT=4000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
-ADMIN_USERNAME=admin
-ADMIN_PASSWORD=Admin@123
+ADMIN_USERNAME=admin(use your own)
+ADMIN_PASSWORD=Admin@123(make your own)
 NODE_ENV=development
 
 # CORS Configuration
@@ -169,8 +169,15 @@ The frontend application will start on `http://localhost:3000`.
 
 ## Default Admin Credentials
 
-- **Username:** admin
-- **Password:** Admin@123
+Initial Admin Setup
+
+The system includes one seeded admin account used to bootstrap the platform.
+
+Username: admin
+Password: Admin@123
+
+This account exists only for demo/testing purposes. 
+In a production deployment, the credentials should be changed immediately.
 
 ---
 
