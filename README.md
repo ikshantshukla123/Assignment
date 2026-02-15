@@ -173,8 +173,8 @@ Initial Admin Setup
 
 The system includes one seeded admin account used to bootstrap the platform.
 
-Username: admin
-Password: Admin@123
+- Username: admin
+- Password: Admin@123
 
 This account exists only for demo/testing purposes. 
 In a production deployment, the credentials should be changed immediately.
