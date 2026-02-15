@@ -16,6 +16,7 @@ export const getAnnouncements = async (req, res) => {
     ],
   })
     .populate("fromAdmin", "username")
+    .populate("toUser", "username") // populate toUser to show who it's targeted to
     .sort({ createdAt: -1 }); //. this -1 will show new announcements first
 
   res.json(announcements);
@@ -40,6 +41,7 @@ export const createAnnouncement = async (req, res) => {
 
   // Populate the announcement before emitting
   await announcement.populate("fromAdmin", "username");
+  await announcement.populate("toUser", "username"); // populate toUser as well
 
   // emit via socket
   const io = req.app.get("io");

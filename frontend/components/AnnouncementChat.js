@@ -2,14 +2,12 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { apiRequest } from "@/lib/api";
-import { useSocket } from "@/hooks/useSocket"
-
+import { useSocket } from "@/hooks/useSocket";
 
 export default function AnnouncementChat() {
   const [announcements, setAnnouncements] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
 
   useEffect(() => {
     const fetchAnnouncements = async () => {
@@ -45,18 +43,27 @@ export default function AnnouncementChat() {
       )}
 
       {announcements.map((a) => (
-        <div
-          key={a._id}
-          className="rounded border bg-white p-4 shadow-sm"
-        >
+        <div key={a._id} className="rounded border bg-white p-4 shadow-sm">
           <div
             className="announcement-content"
             dangerouslySetInnerHTML={{ __html: a.content }}
           />
           <div className="mt-3 flex items-center gap-2 border-t pt-2 text-xs text-gray-500">
-            <span className="font-medium text-blue-600">
-              {a.fromAdmin?.username || "Admin"}
+            <span>
+              <span className="font-semibold">from: </span>
+              <span className="font-medium text-blue-600">
+                {a.fromAdmin?.username || "Admin"}
+              </span>
             </span>
+            {a.toUser && (
+              <>
+                <span>•</span>
+                <span>
+                  <span className="font-semibold">to: </span>
+                  <span className="font-medium text-red-600">{a.toUser.username}</span>
+                </span>
+              </>
+            )}
             <span>•</span>
             <span>{new Date(a.createdAt).toLocaleString()}</span>
           </div>
