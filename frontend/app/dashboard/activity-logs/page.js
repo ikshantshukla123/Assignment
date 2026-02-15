@@ -60,8 +60,8 @@ export default function ActivityLogsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold">Activity Logs</h1>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <h1 className="text-2xl font-bold sm:text-3xl">Activity Logs</h1>
         <Link href="/dashboard">
           <Button variant="outline" size="sm">
             ← Back to Dashboard
@@ -69,23 +69,23 @@ export default function ActivityLogsPage() {
         </Link>
       </div>
 
-      <div className="rounded border bg-white shadow-sm">
+      <div className="overflow-x-auto rounded border bg-white shadow-sm">
         {logs.length === 0 ? (
           <p className="p-4 text-gray-500">No activity logs yet.</p>
         ) : (
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Date & Time</TableHead>
+                <TableHead className="whitespace-nowrap">Date & Time</TableHead>
                 <TableHead>Action</TableHead>
-                <TableHead>Performed By</TableHead>
-                <TableHead>Target User</TableHead>
+                <TableHead className="whitespace-nowrap">Performed By</TableHead>
+                <TableHead className="whitespace-nowrap">Target User</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {logs.map((log) => (
                 <TableRow key={log._id}>
-                  <TableCell className="text-sm text-gray-600">
+                  <TableCell className="whitespace-nowrap text-sm text-gray-600">
                     {new Date(log.createdAt).toLocaleString()}
                   </TableCell>
                   <TableCell>
@@ -97,11 +97,11 @@ export default function ActivityLogsPage() {
                       {formatAction(log.action)}
                     </span>
                   </TableCell>
-                  <TableCell className="font-medium">
+                  <TableCell className="whitespace-nowrap font-medium">
                     {log.performedByUsername || "Unknown"}
-                   
+
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="whitespace-nowrap">
                     {log.targetUsername || "Unknown"}
                     <span className="ml-2 text-xs text-gray-500">
                       ({log.targetRole || "N/A"})
