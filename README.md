@@ -198,7 +198,11 @@ The frontend application will start on `http://localhost:3000`.
 - Environment variables must be configured on the hosting platform.  
 
 ---
-
+### Future goals:
+pagination - Activity logs limited to 100
+search/filter - Could add to user/admin tables 
+tests - Unit/integration tests 
+rate limiting - Could add to prevent spam 
 
 ### Cold Start Notice
 
