@@ -17,6 +17,8 @@ A full-stack web application for managing organizational announcements with real
 - **Role-Based Access**: Separate views and permissions for admins and users
 - **User Management**: Admins can create, update, and delete users and other admins
 - **Secure Authentication**: JWT-based authentication with bcrypt password hashing
+- **Rate Limiting**: Prevents brute force attacks (5 login attempts per 15 minutes)
+- **Activity Logging**: Complete audit trail of all admin actions
 - **Frontend Route Protection**: Next.js middleware for secure routing
 - **Responsive Design**: Modern UI built with Tailwind CSS and shadcn/ui
 
@@ -31,6 +33,7 @@ A full-stack web application for managing organizational announcements with real
 - JWT (jsonwebtoken)  
 - bcrypt  
 - Socket.IO  
+- express-rate-limit  
 
 ### Frontend
 - Next.js (App Router)  
@@ -202,7 +205,7 @@ The frontend application will start on `http://localhost:3000`.
 pagination - Activity logs limited to 100
 search/filter - Could add to user/admin tables 
 tests - Unit/integration tests 
-rate limiting - Could add to prevent spam 
+
 
 ### Cold Start Notice
 

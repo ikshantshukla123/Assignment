@@ -9,6 +9,8 @@ Backend API for the Organization Announcements Platform built with Express.js, M
 - Real-time announcements via Socket.IO
 - Rich text announcement support
 - Targeted and broadcast announcements
+- Rate limiting (prevents brute force attacks)
+- Activity logging for audit trail
 
 ## Setup Instructions
 

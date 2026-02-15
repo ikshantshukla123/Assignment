@@ -6,6 +6,7 @@ import cors from "cors";
 import announcementRoutes from "./routes/announcement.routes.js";
 import activityLogRoutes from "./routes/activityLog.routes.js";
 import { env } from "./config/env.js";
+import rateLimit from "express-rate-limit";
 
 const app = express();
 
@@ -15,7 +16,7 @@ const app = express();
 
 app.use(express.json());
 
-// Configuring cors after deployement 
+// Configuring cors after deployement
 const allowedOrigins = env.CORS_ORIGIN.split(',').map(origin => origin.trim());
 
 app.use(cors({
@@ -32,7 +33,35 @@ app.use(cors({
   credentials: true
 }));
 
+// Rate limiting  
+const generalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, //time is 15 minutes
+  max: 100, // Limit each IP to 100 requests 
+  message: { message: "Too many requests,please try again later." }, // i sends message in json for frontend to handle it properly
+  standardHeaders: true,
+  legacyHeaders: false,
+  handler: (req, res) => {
+    res.status(429).json({
+      message: "Too many requests, please try again later."
+    });
+  }
+});
 
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5, // Limit each IP to 5 login requests
+  message: { message: "Too many login attempts, please try again after 15 minutes." },
+  standardHeaders: true,
+  legacyHeaders: false,
+  handler: (req, res) => {
+    res.status(429).json({
+      message: "Too many login attempts, please try again after 15 minutes."
+    });
+  }
+});
+
+//  general rate limit to all routes
+app.use(generalLimiter);
 
 
 
@@ -41,9 +70,8 @@ app.get("/health", (req, res) => {
   res.status(200).json({ status: "OK" });
 });
 
-
-
-app.use("/auth", authRoutes);
+//added authlimiter here
+app.use("/auth", authLimiter, authRoutes);
 app.use("/admins", adminRoutes);
 app.use("/users", userRoutes);
 app.use("/announcements", announcementRoutes);
